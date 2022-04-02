@@ -1,0 +1,16 @@
+{
+    "name": "COMPANY_HERE.NAME_HERE.Editor",
+    "rootNamespace": "COMPANY_HERE.NAME_HERE.Editor",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

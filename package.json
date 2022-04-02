@@ -1,0 +1,10 @@
+{
+	"name": "PACKAGE_PREFIX.COMPANY_LOWER_HERE.NAME_LOWER_HERE",
+	"displayName": "NAME_DISPLAY_HERE",
+	"version": "1.0.0",
+	"unity": "2019.3",
+	"description": "DESC_HERE",
+    "author": {
+        "name": "COMPANY_HERE"
+    }
+}
