@@ -1,0 +1,31 @@
+﻿name: Release
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    env:
+      GIT_TERMINAL_PROMPT: 0
+      COMMIT_USER: github-actions[bot]
+      COMMIT_EMAIL: github-actions[bot]@users.noreply.github.com
+      REPO_NAME: IsExternalInit
+    steps:
+      - name: Check Out
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Check out the entire repo
+          path: "IsExternalInit" # See https://github.com/nektos/act#module_not_found
+
+      - name: Semantic Release
+        id: release
+        uses: cycjimmy/semantic-release-action@v3
+        with:
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+          working_directory: ${{ env.REPO_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

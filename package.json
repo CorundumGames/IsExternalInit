@@ -1,10 +1,38 @@
 {
-	"name": "PACKAGE_PREFIX.COMPANY_LOWER_HERE.NAME_LOWER_HERE",
-	"displayName": "NAME_DISPLAY_HERE",
-	"version": "1.0.0",
-	"unity": "2019.3",
-	"description": "DESC_HERE",
-    "author": {
-        "name": "COMPANY_HERE"
+  "name": "games.corundum.isexternalinit",
+  "displayName": "IsExternalInit",
+  "version": "1.0.0",
+  "unity": "2021.2",
+  "description": "Enable support for C# 9's record types and the init keyword in Unity.",
+  "author": {
+    "name": "Jesse Talavera-Greenberg",
+    "email": "director@corundum.games",
+    "url": "https://corundum.games"
+  },
+  "keywords": [
+    "isexternalinit",
+    "polyfill",
+    "record",
+    "init",
+    "C# 9"
+  ],
+  "contributors": [
+    {
+      "name": "Roger Johansson",
+      "email": "roger@asynkron.se",
+      "url": "https://asynkron.se"
     }
+  ],
+  "repository": "https://github.com/CorundumGames/IsExternalInit",
+  "homepage": "https://github.com/CorundumGames/IsExternalInit",
+  "documentationUrl": "https://github.com/CorundumGames/IsExternalInit#readme",
+  "devDependencies": {
+    "semantic-release": "^19.0.2",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/commit-analyzer": "^9.0.2",
+    "@semantic-release/npm": "^9.0.1",
+    "@semantic-release/github": "^8.0.2",
+    "minimist": ">=1.2.6"
+  }
 }

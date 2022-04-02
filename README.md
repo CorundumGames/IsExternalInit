@@ -1,20 +1,47 @@
-# UPM Package Template
+# IsExternalInit
 
-This is a template for a basic Unity UPM package. It requires [dotnet-script](https://github.com/filipw/dotnet-script) for configuration.
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/CorundumGames/IsExternalInit/Release/main?logo=github&style=for-the-badge)](https://github.com/CorundumGames/IsExternalInit/actions)
+[![openupm](https://img.shields.io/npm/v/games.corundum.isexternalinit?label=openupm&registry_uri=https://package.openupm.com&style=for-the-badge)](https://openupm.com/packages/games.corundum.isexternalinit)
 
-1. Copy the contents of this folder (minus `.git/`) to an empty folder.
-2. Run `dotnet script setup.csx` and fill out the necessary properties
-    - Package prefix: prefix for package identifier e.g. `com` / `net`
-    - Company: Company short name (for assembly / package identifier naming, e.g. "Cyriaca")
-    - Company (long): Company long name (for license, e.g. "Cyriaca Software")
-    - Name: Package short name (for assembly / package identifier naming, e.g. "MoonSharp")
-    - Display name: Package long name (for display in UPM window, e.g. "MoonSharp Integration")
-    - Description: Package description
+Enables support for C# 9's [`record`](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/records) types and
+[`init` setters](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/init) in Unity.
 
-### Notes
+[Unity 2021.2 technically supports C# 9](https://docs.unity3d.com/2021.2/Documentation/Manual/CSharpCompiler),
+but some of its language features rely on runtime libraries that aren't available in .NET Standard 2.1.
+This package defines an internal class that these features require in order to function.
 
-The defaults assume package prefix `com`, company short-name `Cyriaca`, and company long-name `Cyriaca Software` - this can be changed in `setup.csx`.
+The included assembly originally came from [this NuGet package](https://www.nuget.org/packages/IsExternalInit.System.Runtime.CompilerServices)
+([source](https://github.com/asynkron/IsExternalInit)).
 
-The template includes an MIT license file that should be replaced or removed (along with removing lines containing "LICENSE" in `setup.csx`) if an MIT license is not desired.
+## Installation
 
-`setup.csx` modifies the package files in-place. `.meta` files with random GUIDs are generated.
+Follow the instructions given [here](https://openupm.com/packages/games.corundum.isexternalinit/#modal-manualinstallation)
+to install this package in your project via OpenUPM.
+
+## Usage
+
+This package is delivered as a precompiled assembly
+so that all [assembly definitions](https://docs.unity3d.com/Manual/class-AssemblyDefinitionImporter) reference it automatically.
+There's no public API unless you count the enabled language features.
+As a result,
+you can get started
+using standard [`record`s](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/records) and
+[`init` setters](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/init) immediately.
+
+There are some minor caveats when using this package:
+
+- If an assembly definition uses the "Override References" setting to reference precompiled assemblies explicitly,
+you'll need to add a reference to `IsExternalInit.System.Runtime.CompilerServices`.
+Otherwise, that `asmdef` won't be able to use `record`s or `init`.
+- Unity doesn't currently support serializing or editing `record`s,
+so you'll need to implement that yourself.
+- A future release of Unity with built-in support for `record`s and `init` may break this package
+due to potential naming conflicts with the `System.Runtime.CompilerServices` namespace.
+When that happens,
+I'll add a [`#define` constraint](https://docs.unity3d.com/Manual/PluginInspector)
+[tied to it](https://docs.unity3d.com/Manual/PlatformDependentCompilation) to minimize disruptions.
+
+## Compatibility
+
+This package should work in any version of Unity that provides at least partial support for C# 9, starting with 2021.2.
+The provided assembly is disabled in older versions of Unity (i.e. versions that don't define `UNITY_2021_2_OR_NEWER`).
